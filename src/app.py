@@ -47,10 +47,20 @@ def preprocess_text(text):
 
 # --- 4. ANTARMUKA PENGGUNA (UI) ---
 st.title("📰 Detektor Berita Palsu (Fake News)")
-st.markdown("Masukkan teks berita (dalam bahasa Inggris) di bawah ini untuk mengidentifikasi apakah berita tersebut **Asli** atau **Palsu** berdasarkan probabilitas Naive Bayes.")
 
-# Wadah teks input
-user_input = st.text_area("Teks Berita:", height=250, placeholder="Tempel teks artikel berita di sini...")
+st.info("""
+**⚠️ PERHATIAN: BATASAN SISTEM (SYSTEM LIMITATIONS)**
+1. **Bahasa:** Model ini **HANYA** dapat memproses teks berita berbahasa **Inggris**. Jika memasukkan bahasa lain, prediksi akan gagal secara logika.
+2. **Topik Spesifik:** Kecerdasan buatan ini dilatih dan dioptimalkan secara khusus untuk mengidentifikasi berita di domain **Politik AS, Pemerintahan, dan Isu Global (World News)**. Memasukkan teks berita di luar topik tersebut (seperti olahraga, hiburan, atau fiksi) akan menyebabkan penurunan akurasi yang drastis (*Domain Shift*).
+""", icon="ℹ️")
+
+st.markdown("Masukkan teks artikel berita sesuai kriteria di atas untuk mengidentifikasi apakah berita tersebut **Asli** atau **Palsu** berdasarkan probabilitas algoritma *Multinomial Naive Bayes*.")
+
+user_input = st.text_area(
+    "Teks Berita:", 
+    height=250, 
+    placeholder="Paste an English political/world news article here..."
+)
 
 # --- 5. LOGIKA INFERENSI ---
 if st.button("Deteksi Berita"):
